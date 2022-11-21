@@ -1,0 +1,13 @@
+{
+  "name": "dsf-email-templates",
+  "version": "1.0.0",
+  "description": "This project can be used to produce html email templates to be used by DSF. Ideally these emails should be responsive and have a similar appearance in different email clients and devices.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "DMRID - DSF Team",
+  "license": "MIT",
+  "dependencies": {
+    "mjml": "^4.13.0",
+    "nodemailer": "^6.8.0"
+  }
+}
