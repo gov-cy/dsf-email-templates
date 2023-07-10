@@ -7,7 +7,17 @@
   "author": "DMRID - DSF Team",
   "license": "MIT",
   "dependencies": {
+    "semver": ">=7.5.2",
     "mjml": "^4.13.0",
     "nodemailer": "^6.8.0"
+  },
+  "overrides": {
+      "mjml": {
+          "mjml-cli": {
+            "js-beautify": {
+              "editorconfig": "^2.0.0"
+            }
+          }
+      }
   }
 }
