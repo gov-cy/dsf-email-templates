@@ -7,7 +7,7 @@
     <mj-section>
       <mj-column>
         <mj-text>
-            Αγαπητέ / Αγαπητή {{NAME}},
+            Αγαπητέ / Αγαπητή {{NAME}} 2,
         </mj-text>
       </mj-column>
     </mj-section>
