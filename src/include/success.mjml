@@ -1,6 +1,0 @@
-<mj-section background-color="#00703c">
-    <mj-column background-color="#00703c">
-    <mj-text color="#fff" font-weight="bold" align="center" font-size="24px" color="#000" font-family="helvetica">Έχουμε λάβει την αίτησή σας</mj-text>
-    <mj-text color="#fff" align="center" font-size="18px">Η ημερομηνία της αίτησης είναι {{DATE}} και ο αριθμός αναφοράς σας είναι {{REFERENCE NUMBER}}.</mj-text>
-    </mj-column>
-</mj-section>

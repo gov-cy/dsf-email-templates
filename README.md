@@ -9,11 +9,19 @@ Use this project to produce html email templates to be used by DSF. These emails
 - Follow accessibility guidelines
 - Include the gov.cy branding
 
-The project uses https://mjml.io/ to generate templates which are the simplified manually. 
+The project uses [nunjucks](https://mozilla.github.io/nunjucks/) templates to built the email html.
 
 The project also uses https://mailtrap.io/ for spam analysis and to verify HTML compatibility 
 
-Compatibility with clients: https://mjml.io/faq#use-mjml
+Compatibility with clients based on mailtrap test on 2024-04-10
+
+| Client     | Desktop | Mobile | Web  | 
+| ------     | ------- | ------ |----- |
+| Apple mail | 97%     |  95%   | 100% |
+| Gmail      | 100%    |  89%   | 92%  |
+| Outlook    | 80%     |  93%   | 94%  |
+| Yahoo Mail | 100%    |  80%   | 80%  |
+| Other      | 100%    |  89%   | 89%  |
 
 ## Install
 
@@ -27,26 +35,19 @@ Navigate to your local copies folder though the command line and Run the followi
 
 ## Project structure
 
-- Source files (in mjml format) are stored under `src` folder 
-- Build file (the HTML files built with mjml) are stored under `build` folder
-- Distribution files (the templates and components to be used by the DSF services) are stored under `dist` folder
-- Scripts for tesing are under the `test` folder
+- `src`contains the source files  
+    - `src\njk` contain the nunjucks source base and macros
+    - `src\templates` contain the template files used to build the html files
+- `build` contains the build HTML files 
+- `dist` contains the distribution files (the templates and components to be used by the DSF services)
+- `test` contains the scripts for testing 
 
-## Bulding with MJML
+## Bulding with nunjucks components
 
-If your are using Visual Studio Code, you can use the MJML plugin to view the changes visually. 
-
-To save the HTML result to a file of your choice use:
-
-
-```shell
-node_modules\.bin\mjml src\submission-success-2.mjml -o build\examples\submission-success-2.html 
-```
-
-You can also watch a file to automatically update the output file (index.html) on any changes:
+Use `src\built-with-nunjucks.js` to built the email html file by defining the input and output as arguments. For example:
 
 ```shell
-node_modules\.bin\mjml --watch src\submission-success-2.mjml -o build\examples\submission-success-2.html 
+node .\src\built-with-nunjucks.js .\src\njk\templates\submission-email.njk .\build\test.html
 ```
 
 Note for non-Windows users: you may need to replace regular slashes ( `\` ) with backslashes ( `/` ) in all the paths of the above commands.
@@ -62,7 +63,7 @@ To run the script takes 1 argument which is the path of HTML file for the body o
 for example:
   
 ```shell
-node .\test\mailtrap.js build/examples/submission-success-example.html
+node .\test\mailtrap.js build/test.html
 ```
   
 Note that to use you need to set the mailtrap username and password as follows:
@@ -95,3 +96,6 @@ cap['browserstack.accessKey'] = process.env.MAILTRAP_PASSWORD || 'yyyyyyyy';
 
 Use https://www.putsmail.com/ to send sample html emails 
 
+## Distribute
+
+Run `node .\src\distribute.js` to create the update the files of the `dist` folder

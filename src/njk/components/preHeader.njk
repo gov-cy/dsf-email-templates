@@ -1,0 +1,7 @@
+{# pre header
+ @param {string} preText The pre header text. Will escape text 
+ @returns govcy header for emails html 
+#}
+{% macro gocvyEmailPreHeader(params) -%}
+<div style="display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">{{params.preText}}</div>
+{%- endmacro %}

@@ -1,0 +1,21 @@
+{# pre success panel
+ @param {string} title The success title text. Will escape text 
+ @param {string} body The success body text. Will escape text 
+ @returns govcy success panel for emails html 
+#}
+{% macro gocvyEmailSuccess(params) -%}
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:20px 0;max-width: 600px;background:#00703c;background-color:#00703c;" >
+    <tr>
+        <td align="center" valign="top" style="padding:10px 16px;">
+            <!-- Received -->
+            <div style="font-family:helvetica;font-size:24px;font-weight:bold;line-height:1.5;text-align:center;color:#ffffff;">{{ params.title }}</div>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" valign="top" style="padding:10px 16px;">
+            <!-- details -->
+            <div style="font-family:Arial;font-size:18px;line-height:1.5;text-align:center;color:#ffffff;">{{ params.body }}</div>
+        </td>
+    </tr> 
+</table>
+{%- endmacro %}

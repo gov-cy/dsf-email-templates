@@ -42,7 +42,7 @@ async function main() {
   
   if (myArgs.length < 1) {
     console.log('ERROR: Argument not specified. Specify the path of the HTML file for the body of the email.');
-    exit(0);
+    process.exit(1);
   }
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing

@@ -1,0 +1,20 @@
+{# footer 
+ @param {string} footerText The footerText. Will escape text 
+ @returns govcy footer for emails html 
+#}
+{% macro gocvyEmailFooter(params) -%}
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
+    <tr>
+        <td align="center" valign="top" style="padding:10px 16px 10px;border-top: 4px solid #ffad2d;background:#ebf1f3;background-color:#ebf1f3;">
+            <div style="font-family:Arial; font-size: 24px;text-align:left;margin-bottom: 10px;line-height:1;">
+                <a href="https://gov.cy" style="color:#000000; text-decoration: none;font-weight: 500;">
+                    <strong style="color:#000000; text-decoration: none;font-weight: 500;">gov.cy</strong>
+                </a>
+            </div>
+            <div style="font-family:Arial;font-size:16px;text-align:left;margin-bottom: 10px;line-height:1;" >
+                {{ params.footerText}}
+            </div>
+        </td>
+    </tr>
+</table>
+{%- endmacro %}

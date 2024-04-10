@@ -1,5 +1,0 @@
-<mj-preview>{{PRE-TEXT}}</mj-preview>
-<mj-attributes>
-    <mj-all color="#000000" background-color="#ffffff" font-family="Arial" line-height="1.5" font-size="16px" />
-</mj-attributes>
-<mj-title>{{SERVICE-NAME}}</mj-title>

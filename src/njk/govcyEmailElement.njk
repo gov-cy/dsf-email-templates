@@ -1,0 +1,44 @@
+{% macro govcyEmailElement(component, params) -%}
+    {#- preHeader -#}
+    {%- if component == 'preHeader' -%}
+        {%- from "./components/preHeader.njk" import gocvyEmailPreHeader -%}
+        {{ gocvyEmailPreHeader(params) }}
+    {#- header -#}
+    {%- elif component == 'header' -%}
+        {%- from "./components/header.njk" import gocvyEmailHeader -%}
+        {{ gocvyEmailHeader(params) }}
+    {#- success -#}
+    {%- elif component == 'success' -%}
+        {%- from "./components/success.njk" import gocvyEmailSuccess -%}
+        {{ gocvyEmailSuccess(params) }}
+    {#- bodyList -#}
+    {%- elif component == 'bodyList' -%}
+        {%- from "./components/bodyList.njk" import gocvyEmailBodyList -%}
+        {{ gocvyEmailBodyList(params) }}
+    {#- footer -#}
+    {%- elif component == 'footer' -%}
+        {%- from "./components/footer.njk" import gocvyEmailFooter -%}
+        {{ gocvyEmailFooter(params) }}
+    {#- body -#}
+    {%- elif component == 'body' -%}
+        {%- from "./components/body.njk" import gocvyEmailBody -%}
+        {%- call gocvyEmailBody(params) -%}
+            {{ caller() }}
+        {%- endcall -%}
+    {#- bodyHeading -#}
+    {%- elif component == 'bodyHeading' -%}
+        {%- from "./components/bodyHeading.njk" import gocvyEmailBodyHeading -%}
+        {%- call gocvyEmailBodyHeading(params) -%}
+            {{ caller() }}
+        {%- endcall -%}
+    {#- bodyParagraph -#}
+    {%- elif component == 'bodyParagraph' -%}
+        {%- from "./components/bodyParagraph.njk" import gocvyEmailBodyParagraph -%}
+        {%- call gocvyEmailBodyParagraph(params) -%}
+            {{ caller() }}
+        {%- endcall -%}
+    {%- else -%}
+        {# Handle unknown component types #}
+        Unknown component: {{ component }}
+    {%- endif -%}
+{%- endmacro %}

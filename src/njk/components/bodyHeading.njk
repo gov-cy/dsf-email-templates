@@ -1,0 +1,30 @@
+{# body Heading
+ @param {string} headinLevel The heading level. Optional, default is 1. Can be 1,2,3,4 
+ @returns govcy body Heading for emails html 
+#}
+{% macro gocvyEmailBodyHeading(params) -%}
+{#- set default values -#}
+{%- set headingLevel = params.headinLevel | default(1) -%}
+{%- if headingLevel > 4 -%} 
+    {%- set headingLevel = 4 -%} 
+{%- endif -%}
+{# depending on the heading level set the font-size #}
+{%- if headingLevel == 1 -%}
+    {%- set fontSize = '28px' -%}
+{%- elif headingLevel == 2 -%}
+    {%- set fontSize = '24px' -%}
+{%- elif headingLevel == 3 -%}
+    {%- set fontSize = '20px' -%}
+{%- else -%}
+    {%- set fontSize = '18px' -%}
+{%- endif -%}
+<tr>
+    <td align="center" valign="top" style="padding:10px 16px;">
+        <div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;" >
+            <h{{headingLevel}} style="font-size:{{fontSize}};font-weight:700;margin: 0;">
+                {{ caller() }}
+            </h{{headingLevel}}>
+        </div>
+    </td>
+</tr>
+{%- endmacro %}
