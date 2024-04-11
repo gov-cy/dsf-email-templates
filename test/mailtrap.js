@@ -7,7 +7,7 @@
  * for example:
  * 
  * ```
- * node .\test\mailtrap.js build/submission-success-example.html
+ * node .\test\mailtrap.js build/test.html
  * ```
  * 
  * Note that to use you need to set the mailtrap username and password as followes:
@@ -31,12 +31,12 @@
  * ```
  * 
  */
-const nodemailer = require("nodemailer");
-const fs = require("fs");
-const { exit } = require("process");
+import nodemailer from 'nodemailer';
+import fs from 'fs';
+import { exit } from 'process';
 
 // async..await is not allowed in global scope, must use a wrapper
-async function main() {
+async function testMailtrap() {
 
   const myArgs = process.argv.slice(2);
   
@@ -60,7 +60,6 @@ async function main() {
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    //from: '"Fred Foo 👻" <foo@example.com>', // sender address
     from: 'noreply@dits.dmrid.gov.cy', // sender address
     to: "test@dits.dmrid.gov.cy", // list of receivers
     subject: "{{SERVICE-NAME}}", // Subject line
@@ -89,4 +88,12 @@ async function main() {
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
-main().catch(console.error);
+// Call testMailtrap() and handle errors
+testMailtrap()
+    .then(() => {
+        console.log('Mailtrap test successful');
+    })
+    .catch((error) => {
+        console.error('An error occurred:', error);
+        process.exit(1); // Exit with a non-zero status code
+    });

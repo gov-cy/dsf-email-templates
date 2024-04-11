@@ -35,19 +35,19 @@ Navigate to your local copies folder though the command line and Run the followi
 
 ## Project structure
 
-- `src`contains the source files  
+- `bin` contains the command line tools
+- `src` contains the source files  
     - `src\njk` contain the nunjucks source base and macros
     - `src\templates` contain the template files used to build the html files
 - `build` contains the build HTML files 
-- `dist` contains the distribution files (the templates and components to be used by the DSF services)
 - `test` contains the scripts for testing 
 
 ## Bulding with nunjucks components
 
-Use `src\built-with-nunjucks.js` to built the email html file by defining the input and output as arguments. For example:
+Use `npm run built` to built the email html file by defining the input and output as arguments. For example:
 
 ```shell
-node .\src\built-with-nunjucks.js .\src\njk\templates\submission-email.njk .\build\test.html
+npm run build .\src\built-with-nunjucks.js .\src\njk\templates\submission-email.njk .\build\submission-email.html
 ```
 
 Note for non-Windows users: you may need to replace regular slashes ( `\` ) with backslashes ( `/` ) in all the paths of the above commands.
@@ -63,7 +63,7 @@ To run the script takes 1 argument which is the path of HTML file for the body o
 for example:
   
 ```shell
-node .\test\mailtrap.js build/test.html
+npm run test build/submission-email.html
 ```
   
 Note that to use you need to set the mailtrap username and password as follows:
@@ -95,7 +95,3 @@ cap['browserstack.accessKey'] = process.env.MAILTRAP_PASSWORD || 'yyyyyyyy';
 ### Putsmail
 
 Use https://www.putsmail.com/ to send sample html emails 
-
-## Distribute
-
-Run `node .\src\distribute.js` to create the update the files of the `dist` folder
