@@ -2,7 +2,7 @@
 /**
  * Send test email on you mailtrap account. 
  * 
- * To run the script takes 1 argument which is the path of njk file to render the body of the email
+ * To run the script takes 1 argument which is the path of t file for the body of the email
  * 
  * for example:
  * 
@@ -33,17 +33,22 @@
  */
 import nodemailer from 'nodemailer';
 import fs from 'fs';
+import { DSFEmailRenderer } from '../src/index.mjs';
 import { exit } from 'process';
 
 // async..await is not allowed in global scope, must use a wrapper
 async function testMailtrap() {
-
+  
   const myArgs = process.argv.slice(2);
   
   if (myArgs.length < 1) {
     console.log('ERROR: Argument not specified. Specify the path of the HTML file for the body of the email.');
     process.exit(1);
   }
+  const renderer = new DSFEmailRenderer();
+  //render html 
+  const htmlBody = await renderer.renderFromFile(myArgs[0]);
+
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
   let testAccount = await nodemailer.createTestAccount();
@@ -57,7 +62,7 @@ async function testMailtrap() {
       pass: process.env.MAILTRAP_PASSWORD
     }
   });
-
+  
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: 'govcy" <noreply@gov.cy>', // sender address
@@ -77,7 +82,7 @@ async function testMailtrap() {
     // Τηλέφωνο: 22867640
     // Ωράριο: Δευτέρα με Παρασκευή, 8:00 π.μ. – 3:00 μ.μ.
     // Μην απαντήσετε σε αυτό το email.`, // plain text body
-    html: fs.readFileSync(myArgs[0])
+    html: htmlBody
   });
 
   console.log("Message sent: %s", info.messageId);

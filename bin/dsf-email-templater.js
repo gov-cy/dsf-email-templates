@@ -15,7 +15,8 @@ const renderer = new DSFEmailRenderer();
 
 (async () => {
   try {
-    await renderer.renderInFile(inputPath, outputPath);
+    const inputTemplate = await renderer.renderFromFile(inputPath);
+    await renderer.saveFile(inputTemplate, outputPath);
   } catch (error) {
     console.error(error);
     process.exit(1);

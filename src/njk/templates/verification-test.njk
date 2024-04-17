@@ -1,0 +1,33 @@
+{# extend the base html #}
+{% extends "govcyBase.njk" %}
+{# import components #}
+{% from "govcyEmailElement.njk" import govcyEmailElement %}
+{# set language #}
+{% set lang='el'%}
+{# set the blocks of the base template  #}
+    {# language block  #}
+    {% block lang %}{{lang}}{% endblock %}
+    {# subject block #}
+    {% block subject %}Service email{% endblock %}
+    {# pre header block #}
+    {% block pre -%}{{ govcyEmailElement ('preHeader',{preText:'The pre header text'}) }}{%- endblock %}
+    {# header block #}
+    {% block header -%}
+        {# use the header component #}
+        {{ govcyEmailElement ('header',{serviceName:'Service name', name:'First and Last name',lang:lang}) }}
+    {%- endblock %}
+    {# body block #}
+    {% block body -%}
+        {# use the body component   #}
+        {% call govcyEmailElement('body') -%}
+            {# use combinatopn of body components to complete the body #}
+            {% call govcyEmailElement('bodyHeading',{headinLevel:1}) -%}
+                Verify code: 12234
+            {%- endcall %}
+        {%- endcall%}
+    {%- endblock %}
+    {# footer block #}
+    {% block footer -%}
+        {# use the footer component #}
+        {{ govcyEmailElement ('footer',{footerText:'Όνομα υπηρεσίας'}) }}
+    {%- endblock %}

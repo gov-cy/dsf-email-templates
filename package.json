@@ -1,14 +1,13 @@
 {
   "name": "@gov-cy/dsf-email-templates",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This project can be used to produce html email templates to be used by DSF.",
   "author": "DMRID - DSF Team",
   "license": "MIT",
   "type": "module",
-  "main": "src/index.mjs",
   "module": "src/index.mjs",
   "bin": {
-    "dsf-email-templater": "./bin/dsf-email-templater"
+    "dsf-email-templater": "./bin/dsf-email-templater.js"
   },
   "keywords": [
     "govcy",
@@ -29,7 +28,12 @@
     "semver": ">=7.5.2"
   },
   "scripts": {
-    "test": "node ./test/mailtrap.js",
+    "test": "mocha --timeout 60000 ./test/**/*.test.js",
+    "test-mailtrap": "node ./test/mailtrap.js",
     "build": "node ./bin/dsf-email-templater.js"
+  },
+  "devDependencies": {
+    "chai": "^5.1.0",
+    "mocha": "^10.4.0"
   }
 }

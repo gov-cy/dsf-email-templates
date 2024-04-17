@@ -21,8 +21,8 @@
         {# use the email success component #}
         {{ govcyEmailElement ('success',
         {
-            title:'Έχουμε λάβει την αίτησή σας', 
-            body:'Η ημερομηνία της αίτησης είναι 12/1/2024 και ο αριθμός αναφοράς σας είναι DSF123456789.'}
+            title:'Έχουμε λάβει την αίτησή σας για έκδοση ταυτότητας'
+        }
         ) }}
     {%- endblock %}
     {# body block #}
@@ -30,6 +30,9 @@
         {# use the body component   #}
         {% call govcyEmailElement('body') -%}
             {# use combinatopn of body components to complete the body #}
+            {% call govcyEmailElement('bodyParagraph') -%}
+                Η ημερομηνία της αίτησης είναι 12/1/2024 και ο αριθμός αναφοράς σας είναι DSF123456789.
+            {%- endcall %}
             {% call govcyEmailElement('bodyHeading',{headinLevel:1}) -%}
                 Heading 1
             {%- endcall %}

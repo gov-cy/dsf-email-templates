@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.0.2] - 2024-04-14
+
+### Added
+- `DSFEmailRenderer.renderFromJson` 
+- `DSFEmailRenderer.renderFromString` 
+- `DSFEmailRenderer.renderFromFile` 
+- `DSFEmailRenderer.saveFile` 
+- Added unit tests for generated HTML `test\moca\unit.test.js`
+- Added mailtrap tests that generates and sends email from njk file `test\mailtrap-njk.js`
+
+### Changed
+- Updates to load njk directory when package is linked to another project
+- Changed the way `DSFEmailRenderer`. Now everything revolves around the `renderFromString` function
+- Changed `bodyHeading.njk`, `bodyList.njk`, `bodyHeading.njk` to include reusable code from paragraph
+
+### Fixed
+- Fixed `bodyList` to be a paragraph of it's own
+
 ## [v1.0.1] - 2024-04-11
 
 Complete restructure to prepare to be used as an NPM Package
