@@ -3,7 +3,7 @@
 {# import components #}
 {% from "govcyEmailElement.njk" import govcyEmailElement %}
 {# set language #}
-{% set lang='el'%}
+{% set lang='en'%}
 {# set the blocks of the base template  #}
     {# language block  #}
     {% block lang %}{{lang}}{% endblock %}
@@ -21,7 +21,8 @@
         {# use the email success component #}
         {{ govcyEmailElement ('success',
         {
-            title:'Έχουμε λάβει την αίτησή σας για έκδοση ταυτότητας'
+            title:'Success messasage',
+            body:'Lorem ipsum'
         }
         ) }}
     {%- endblock %}
@@ -30,39 +31,17 @@
         {# use the body component   #}
         {% call govcyEmailElement('body') -%}
             {# use combinatopn of body components to complete the body #}
-            {% call govcyEmailElement('bodyParagraph') -%}
-                Η ημερομηνία της αίτησης είναι 12/1/2024 και ο αριθμός αναφοράς σας είναι DSF123456789.
-            {%- endcall %}
             {% call govcyEmailElement('bodyHeading',{headinLevel:1}) -%}
                 Heading 1
             {%- endcall %}
             {% call govcyEmailElement('bodyParagraph') -%}
-                Αν χρειαστούμε οποιοδήποτε άλλο στοιχείο κατά τη διάρκεια εξέτασης της αίτησής σας, θα επικοινωνήσουμε μαζί σας
+                Body
             {%- endcall %}
-            {% call govcyEmailElement('bodyHeading',{headinLevel:2}) -%}
-                Heading 2
-            {%- endcall %}
-            {% call govcyEmailElement('bodyParagraph') -%}
-                Lorem ipsum kai xero go kouventes
-            {%- endcall %}
-            {% call govcyEmailElement('bodyHeading',{headinLevel:3}) -%}
-                Heading 3
-            {%- endcall %}
-            {% call govcyEmailElement('bodyParagraph') -%}
-                Lorem ipsum kai xero go kouventes
-            {%- endcall %}
-            {% call govcyEmailElement('bodyHeading',{headinLevel:4}) -%}
-                Heading 4
-            {%- endcall %}
-            {% call govcyEmailElement('bodyParagraph') -%}
-                Lorem ipsum kai xero go kouventes
-            {%- endcall %}
-            {{ govcyEmailElement ('bodyList',{type:'ol', items: ["xero -", "go", "kouvente"]}) }}
-            {{ govcyEmailElement ('bodyList',{type:'ul', items: ['<a href="#">xero</a>', "go", "kouvente"]}) }}
+            {{ govcyEmailElement ('bodyList',{type:'ol', items: ["item 1", "item 2", "item 3"]}) }}
         {%- endcall%}
     {%- endblock %}
     {# footer block #}
     {% block footer -%}
         {# use the footer component #}
-        {{ govcyEmailElement ('footer',{footerText:'Όνομα υπηρεσίας'}) }}
+        {{ govcyEmailElement ('footer',{footerText:'Service name'}) }}
     {%- endblock %}
