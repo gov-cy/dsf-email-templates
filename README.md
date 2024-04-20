@@ -298,7 +298,7 @@ Here's a complete example of a nunjucks template using DSF assets:
             {{ govcyEmailElement ('bodyList',
                 {type:'ol', 
                     items: [
-                        "<b>Ονοματεπώνυμο</b>: Κωνσταντίνος Ευαγγέλου", 
+                        "<b>Ονοματεπώνυμο</b>: Όνομα Επώνυμο", 
                         "<b>Αριθμός ταυτότητας</b>: 123456", 
                         "<b>Ημερομηνία έκδοσης</b>: 1/1/2019"
                         ]
