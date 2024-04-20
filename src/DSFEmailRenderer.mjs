@@ -45,7 +45,7 @@ export default class DSFEmailRenderer {
       renderFromString(input) {
           // Render template
           const renderedContent = nunjucks.renderString(input, {});
-          console.log(renderedContent);
+          //console.log(renderedContent);
           // Return the rendered template
           return renderedContent;
       }

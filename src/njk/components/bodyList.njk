@@ -9,7 +9,7 @@
 {%- set type = params.type | default('ul') -%}
 {# depending on the heading level set the font-size #}
 {%- if type == 'ol' -%}
-    {%- set openHTML = '<ol style="margin:0; margin-left: 16px; padding:0; line-height:22px;" align="left" type="disc">' -%}
+    {%- set openHTML = '<ol style="margin:0; margin-left: 16px; padding:0; line-height:22px;" align="left">' -%}
     {%- set closeHTML = '</ol>' -%}
 {%- else -%}
     {%- set openHTML = '<ul style="margin:0; margin-left: 16px; padding:0; line-height:22px;" align="left" type="disc">' -%}
