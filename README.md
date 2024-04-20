@@ -276,7 +276,7 @@ Here's a complete example of a nunjucks template using DSF assets:
     {# header block #}
     {% block header -%}
         {# use the header component #}
-        {{ govcyEmailElement ('header',{serviceName:'Έκδοση πιστοποιητικού γέννησης', name:'Κωνσταντίνος Ευαγγέλου',lang:lang}) }}
+        {{ govcyEmailElement ('header',{serviceName:'Έκδοση πιστοποιητικού γέννησης', name:'Όνομα Επώνυμο',lang:lang}) }}
     {%- endblock %}
     {# success block #}
     {% block success -%}
