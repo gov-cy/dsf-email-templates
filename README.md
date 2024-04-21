@@ -1,6 +1,7 @@
 ![License](https://img.shields.io/github/license/gov-cy/dsf-email-template)
 [![Unit test](https://github.com/gov-cy/dsf-email-template/actions/workflows/unit-test.yml/badge.svg)](https://github.com/gov-cy/dsf-email-template/actions/workflows/unit-test.yml)
 [![tag-and-publish-on-version-change](https://github.com/gov-cy/dsf-email-template/actions/workflows/tag-and-publish-on-version-change.yml/badge.svg)](https://github.com/gov-cy/dsf-email-template/actions/workflows/tag-and-publish-on-version-change.yml)
+[![tag-and-publish-on-version-change](https://github.com/gov-cy/dsf-email-template/actions/workflows/mailtrap-test.yml/badge.svg)](https://github.com/gov-cy/dsf-email-template/actions/workflows/mailtrap-test.yml)
 
 Use this project to produce html email templates to be used by DSF. These emails should:
 
