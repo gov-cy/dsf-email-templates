@@ -36,7 +36,7 @@ describe('2. Testing `DSFEmailRenderer.renderFromJson`', () => {
     let inputJson={
         lang: "el",
         subject: "Service email",
-        preHeader: "The pre header text",
+        pre: "The pre header text",
         header: {serviceName:'Service name', name:'First and Last name'},
         success: {
             title:'title part',
@@ -177,70 +177,3 @@ function renderChecks(renderedHTML, checksNum){
         expect(renderedHTML).to.match(expectedRegex);
     });
 }
-// (async () => {
-//     try {
-//     const renderer = new DSFEmailRenderer();
-//     let inputString = `
-// {# extend the base html #}
-// {% extends "govcyBase.njk" %}
-// {# import components #}
-// {% from "govcyEmailElement.njk" import govcyEmailElement %}
-// {# set language #}
-// {% set lang='el'%}
-// {# set the blocks of the base template  #}
-//     {# language block  #}
-//     {% block lang %}{{lang}}{% endblock %}
-//     {# subject block #}
-//     {% block subject %}Service email{% endblock %}
-//     {# pre header block #}
-//     {% block pre -%}{{ govcyEmailElement ('preHeader',{preText:'The pre header text'}) }}{%- endblock %}
-//     {# header block #}
-//     {% block header -%}
-//         {# use the header component #}
-//         {{ govcyEmailElement ('header',{serviceName:'Service name', name:'First and Last name',lang:lang}) }}
-//     {%- endblock %}
-//     {# body block #}
-//     {% block body -%}
-//         {# use the body component   #}
-//         {% call govcyEmailElement('body') -%}
-//             {# use combinatopn of body components to complete the body #}
-//             {% call govcyEmailElement('bodyHeading',{headinLevel:1}) -%}
-//                 Verify code: 12234
-//             {%- endcall %}
-//         {%- endcall%}
-//     {%- endblock %}
-//     {# footer block #}
-//     {% block footer -%}
-//         {# use the footer component #}
-//         {{ govcyEmailElement ('footer',{footerText:'Όνομα υπηρεσίας'}) }}
-//     {%- endblock %}
-//     `
-//     // console.log(renderer.renderFromString(inputString));
-
-//     //------------
-
-//     //TODO
-//     let inputJson={
-//         lang: "en",
-//         subject: "from json input",
-//         preHeader: "PRE HEADER TEXT",
-//         header: {serviceName:'Service name', name:'First and Last name'},
-//         success: {
-//           title:'Έχουμε λάβει την αίτησή σας',
-//           body:'Η ημερομηνία της αίτησης είναι 12/1/2024 και ο αριθμός αναφοράς σας είναι DSF123456789.'
-//         },
-//         body: [
-//           {"component": "bodyHeading",params: '{"headinLevel":1}',body:"Heading 1"},
-//           {"component": "bodyParagraph", body:"Αν χρειαστούμε οποιοδήποτε άλλο στοιχείο κατά τη διάρκεια εξέτασης της αίτησής σας, θα επικοινωνήσουμε μαζί σας"},
-//         ],
-//         footer: {
-//             footerText: "Name of service"
-//         }
-//       }
-//     console.log(renderer.renderFromJson(inputJson));
-
-//   } catch (error) {
-//     console.error(error);
-//     process.exit(1);
-//   }
-// })();

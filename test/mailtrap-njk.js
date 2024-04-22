@@ -68,29 +68,14 @@ async function testMailtrap() {
     from: 'govcy" <noreply@gov.cy>', // sender address
     to: "test@dits.dmrid.gov.cy", // list of receivers
     subject: "{{SERVICE-NAME}}", // Subject line
-    // text: `
-    // {{SERVICE-NAME}}
-    // Αγαπητέ / Αγαπητή {{NAME}},
-    // Έχουμε λάβει την αίτησή σας
-    // Η ημερομηνία της αίτησης είναι {{DATE}} και ο αριθμός αναφοράς σας είναι {{REFERENCE NUMBER}}.
-    // Αν χρειαστούμε οποιοδήποτε άλλο στοιχείο κατά τη διάρκεια εξέτασης της αίτησής σας, θα επικοινωνήσουμε μαζί σας.
-    // Μετά την ολοκλήρωση της εξέτασης θα σας στείλουμε email και sms για το αποτέλεσμα. Μπορείτε, επίσης, να μάθετεπερισσότερες πληροφορίες για την εγγραφή στον Εκλογικό κατάλογο.
-    // Πληροφορίες σχετικά με τις εκλογές που διεξάγονται στην Κυπριακή Δημοκρατία, μπορείτε να βρείτε στην ιστοσελίδα της Υπηρεσίας Εκλογών.
-    // Για θέματα που αφορούν την αίτησή σας, επικοινωνήστε:
-    // Υπηρεσία Εκλογών
-    // Email: ElectoralRoll@moi.gov.cy
-    // Τηλέφωνο: 22867640
-    // Ωράριο: Δευτέρα με Παρασκευή, 8:00 π.μ. – 3:00 μ.μ.
-    // Μην απαντήσετε σε αυτό το email.`, // plain text body
+    // text: `Text`, // plain text body
     html: htmlBody
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   // Preview only available when sending through an Ethereal account
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
 // Call testMailtrap() and handle errors

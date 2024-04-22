@@ -78,8 +78,8 @@ export default class DSFEmailRenderer {
         {% block subject %}${jsonInput.subject}{% endblock %}
         `
         //if there is a pre-header
-        if (jsonInput.hasOwnProperty('preHeader')){
-          jsonTemplate += `{% block pre -%}{{ govcyEmailElement ('preHeader',{preText:'${jsonInput.preHeader}'}) }}{%- endblock %}`
+        if (jsonInput.hasOwnProperty('pre')){
+          jsonTemplate += `{% block pre -%}{{ govcyEmailElement ('preHeader',{preText:'${jsonInput.pre}'}) }}{%- endblock %}`
         }
         //if there is a header
         if (jsonInput.hasOwnProperty('header')){

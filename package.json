@@ -1,6 +1,6 @@
 {
   "name": "@gov-cy/dsf-email-templates",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "This project can be used to produce html email templates to be used by DSF.",
   "author": "DMRID - DSF Team",
   "license": "MIT",
@@ -31,6 +31,7 @@
   "scripts": {
     "test": "mocha --timeout 60000 ./test/**/*.test.js",
     "test-mailtrap": "node ./test/mailtrap.js",
+    "test-mailtrap-njk": "node ./test/mailtrap-njk.js",
     "build": "node ./bin/dsf-email-templater.js"
   },
   "devDependencies": {
