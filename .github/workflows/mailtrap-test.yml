@@ -22,4 +22,4 @@ jobs:
           env:
             MAILTRAP_USERNAME: ${{ secrets.MAILTRAP_USERNAME }}
             MAILTRAP_PASSWORD: ${{ secrets.MAILTRAP_PASSWORD }}
-          run: npm run test-mailtrap ./build/submission-email.html # Run the mailtrap.js script
+          run: npm run test-mailtrap-njk ./src/njk/templates/submission-email.njk # Run the mailtrap-njk.js script

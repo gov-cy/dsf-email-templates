@@ -342,7 +342,7 @@ const renderer = new DSFEmailRenderer();
 const inputJson={
         lang: "el",
         subject: "Service email",
-        preHeader: "The pre header text",
+        pre: "The pre header text",
         header: {serviceName:'Service name', name:'First and Last name'},
         success: {
             title:'title part',
