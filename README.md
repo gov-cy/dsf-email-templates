@@ -11,6 +11,7 @@ Use this project to produce html email templates to be used by DSF. These emails
 - Make sure it works well with most email clients
 - Be responsive (work well on desktop and mobiles)
 - Follow accessibility guidelines
+- Allow multi-language content
 - Include the gov.cy branding
 
 The project uses [nunjucks](https://mozilla.github.io/nunjucks/) templates to built the email html.
@@ -30,10 +31,9 @@ Compatibility with clients based on mailtrap test on 2024-04-10
 ## Features
 
 `DSF-email-templates` can:
-- Generate email HTML from input nunjucks template, using the project's base template and macros.
-- Generate email HTML from input JSON data
-
-It can be used by importing the class in your code, or from the command line using file input.
+- Generate email HTML programmatically from input nunjucks template, using the project's base template and macros.
+- Generate email HTML programmatically from input JSON data
+- Generate email HTML from the command line 
 
 ## Install
 
@@ -42,15 +42,6 @@ First, install the DSF Email Templates package using npm:
 ```shell
 npm install @gov-cy/dsf-email-templates
 ```
-
-## Project structure
-
-- `bin` contains the command line tools
-- `src` contains the source files  
-    - `src\njk` contain the nunjucks source base and macros
-    - `src\templates` contain the template files used to build the html files
-- `build` contains the build HTML files 
-- `test` contains the scripts for testing 
 
 ## Using it Programmatically
 
@@ -79,8 +70,9 @@ const inputString = `
 {% block header -%}{{ govcyEmailElement ('header',{serviceName:'Service name', name:'First and Last name',lang:lang}) }}{%- endblock %}
 {% block body -%}
     {% call govcyEmailElement('body') -%}
-        {% call govcyEmailElement('bodyHeading',{headinLevel:1}) -%}Heading 1{%- endcall %}
+        {% call govcyEmailElement('bodyHeading',{headingLevel:1}) -%}Heading 1{%- endcall %}
         {% call govcyEmailElement('bodyParagraph') -%}Paragraph{%- endcall %}
+        {% call govcyEmailElement('bodyParagraph',{"lang":"el"}) -%}Παράγραφος{%- endcall %}
     {% endcall %}
 {% endblock %}
 {% block footer -%}
@@ -125,7 +117,6 @@ You can then use various the base template's blocks to built the structure of th
 - **subject**: Set's the html title. Usually the same as the intended email subject
 - **pre**: Pre header text that is invisible in the html body 
 - **header**: The header of the email with the gov.cy logo and name of the service or site
-- **success**: An area dedicated to showing the success panel. To be used when sending emails after successful submissions from a service.
 - **body**: The main body of the email. 
 - **footer**: The footer of the email
 
@@ -138,7 +129,6 @@ Here's an example using the blocks of the base template. Note that this will onl
 {% block subject %}Service email{% endblock %}
 {% block pre -%}The pre header text'{%- endblock %}
 {% block header -%}The header{%- endblock %}
-{% block success -%}Success message{%- endblock %}
 {% block body -%}The Body{% endblock %}
 {% block footer -%}The footer{%- endblock %}
 ```
@@ -181,7 +171,7 @@ Returns govcy header for emails html. It should be used in the `header` block.
 **Parameters**
 - {string} `serviceName` The service name. Will escape text
 - {string} `name` The name used in salutation. Will escape text 
-- {string} `lang` The language used. Can be 'en','el'. Optional, default is 'el'.
+- {string} `lang` The language used. Can be 'en','el'. Optional.
 
 Usage example: 
 
@@ -214,17 +204,43 @@ Usage example:
 </details>
 
 <details>
+  <summary>bodySuccess</summary>
+  
+Returns govcy success panel for emails html. It should be used in the `body` block. 
+
+**Parameters**
+- {string} `title` The success title text. Will escape text 
+- {string} `body` The success body text. Will escape text 
+- {string} `lang` The language used. Can be 'en','el'. Optional.
+
+Usage example: 
+
+```njk
+{{ govcyEmailElement 
+    (
+        'bodySuccess',
+        {
+            title:'title part', 
+            body:'body part'
+        }
+    ) 
+}}
+```
+</details>
+
+<details>
   <summary>bodyHeading</summary>
   
 Returns govcy an h1, h2, h3 or h3 for emails html. It should be used in the `body` block. It returns the content available inside the macro.
 
 **Parameters**
-- {string} `headinLevel` The heading level. Optional, default is 1. Can be 1,2,3,4 
+- {string} `headingLevel` The heading level. Optional, default is 1. Can be 1,2,3,4
+- {string} `lang` The language used. Can be 'en','el'. Optional.
 
 Usage example: 
 
 ```njk
-{% call govcyEmailElement('bodyHeading',{headinLevel:2}) -%}
+{% call govcyEmailElement('bodyHeading',{headingLevel:2,lang:'en'}) -%}
     Heading 2
 {%- endcall %}
 ```
@@ -233,12 +249,16 @@ Usage example:
 <details>
   <summary>bodyParagraph</summary>
   
-Returns govcy a paragraph. It should be used in the `body` block. It accepts no parameters and returns the content available inside the macro.
+Returns govcy a paragraph. It should be used in the `body` block. It returns the content available inside the macro.
+
+**Parameters**
+- {string} `headingLevel` The heading level. Optional, default is 1. Can be 1,2,3,4
+- {string} `lang` The language used. Can be 'en','el'. Optional.
 
 Usage example: 
 
 ```njk
-{% call govcyEmailElement('bodyParagraph') -%}
+{% call govcyEmailElement('bodyParagraph',{lang:'en'}) -%}
     Lorem ipsum
 {%- endcall %}
 ```
@@ -252,6 +272,7 @@ Returns govcy an ordered or un-ordered list. It should be used in the `body` blo
 **Parameters** 
 - {string} `type` The list type. Optional, default is 'ul'. Can be 'ul', 'ol' 
 - {array} `items` The array of items to turn onto list items 
+- {string} `lang` The language used. Can be 'en','el'. Optional.
 
 Usage example: 
 
@@ -280,21 +301,19 @@ Here's a complete example of a nunjucks template using DSF assets:
     {# header block #}
     {% block header -%}
         {# use the header component #}
-        {{ govcyEmailElement ('header',{serviceName:'Έκδοση πιστοποιητικού γέννησης', name:'Όνομα Επώνυμο',lang:lang}) }}
+        {{ govcyEmailElement ('header',{serviceName:'Έκδοση πιστοποιητικού γέννησης',lang:lang}) }}
     {%- endblock %}
     {# success block #}
-    {% block success -%}
-        {# use the email success component #}
-        {{ govcyEmailElement ('success',
-        {
-            title:'Το πιστοποιητικό γέννησης που εκδώσατε είναι έτοιμο', 
-            body:'Αριθμός αναφοράς 123456'}
-        ) }}
-    {%- endblock %}
     {# body block #}
     {% block body -%}
         {# use the body component   #}
         {% call govcyEmailElement('body') -%}
+            {# use the email success component #}
+            {{ govcyEmailElement ('bodySuccess',
+            {
+                title:'Το πιστοποιητικό γέννησης που εκδώσατε είναι έτοιμο', 
+                body:'Αριθμός αναφοράς 123456'}
+            ) }}
             {# use combinatopn of body components to complete the body #}
             {% call govcyEmailElement('bodyParagraph') -%}
                 Η ημερομηνία έκδοσης είναι 1/1/2019 και ο αριθμός αναφοράς σας είναι 123456.
@@ -341,23 +360,24 @@ import { DSFEmailRenderer } from '@gov-cy/dsf-email-templates';
 const renderer = new DSFEmailRenderer();
 
 const inputJson={
-        lang: "el",
-        subject: "Service email",
-        pre: "The pre header text",
-        header: {serviceName:'Service name', name:'First and Last name'},
-        success: {
-            title:'title part',
-            body:'body part'
-        },
-        body: [
-            {"component": "bodyHeading",params: '{"headinLevel":1}',body:"Heading 1"},
-            {"component": "bodyParagraph", body:"Paragraph"},
-            {"component": "bodyList", params: 'type:"ol", items: ["item 1", "item 2", "item 3"]'}
-        ],
-        footer: {
-            footerText: "Name of service"
-        }
+    lang: "el",
+    subject: "Service email",
+    pre: "The pre header text",
+    header: {serviceName:'Service name', name:'First and Last name'},
+    success: {
+        title:'title part',
+        body:'body part'
+    },
+    body: [
+        {"component": "bodySuccess", params:"{title:'title part', body:'body part'}"},
+        {"component": "bodyHeading",params: '{"headingLevel":1}',body:"Heading 1"},
+        {"component": "bodyParagraph", body:"Paragraph",params:'{lang:"en"}'},
+        {"component": "bodyList", params:'{type:"ol", items: ["item 1", "item 2", "item 3"]}'}
+    ],
+    footer: {
+        footerText: "Name of service"
     }
+}
 
 //Render the email template 
 const renderedTemplate = renderer.renderFromJson(inputJson);

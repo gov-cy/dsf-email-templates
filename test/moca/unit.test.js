@@ -12,15 +12,15 @@ describe('1. Testing `DSFEmailRenderer.renderFromString`, use of `govcyBase.njk`
         {% block lang %}{{lang}}{% endblock %}
         {% block subject %}Service email{% endblock %}
         {% block pre -%}{{ govcyEmailElement ('preHeader',{preText:'The pre header text'}) }}{%- endblock %}
-        {% block header -%}{{ govcyEmailElement ('header',{serviceName:'Service name', name:'First and Last name',lang:lang}) }}{%- endblock %}
-        {% block success -%}{{ govcyEmailElement ('success',{title:'title part', body:'body part'}) }}{%- endblock %}
+        {% block header -%}{{ govcyEmailElement ('header',{serviceName:'Service name'}) }}{%- endblock %}
         {% block body -%}
             {% call govcyEmailElement('body') -%}
                 {% call govcyEmailElement('bodyParagraph') -%}Paragraph{%- endcall %}
-                {% call govcyEmailElement('bodyHeading',{headinLevel:1}) -%}Heading 1{%- endcall %}
-                {% call govcyEmailElement('bodyHeading',{headinLevel:2}) -%}Heading 2{%- endcall %}
-                {% call govcyEmailElement('bodyHeading',{headinLevel:3}) -%}Heading 3{%- endcall %}
-                {% call govcyEmailElement('bodyHeading',{headinLevel:4}) -%}Heading 4{%- endcall %}
+                {{ govcyEmailElement ('bodySuccess',{title:'title part', body:'body part'}) }}
+                {% call govcyEmailElement('bodyHeading',{headingLevel:1}) -%}Heading 1{%- endcall %}
+                {% call govcyEmailElement('bodyHeading',{headingLevel:2}) -%}Heading 2{%- endcall %}
+                {% call govcyEmailElement('bodyHeading',{headingLevel:3}) -%}Heading 3{%- endcall %}
+                {% call govcyEmailElement('bodyHeading',{headingLevel:4}) -%}Heading 4{%- endcall %}
             {% endcall %}
         {% endblock %}
         {% block footer -%}
@@ -37,17 +37,14 @@ describe('2. Testing `DSFEmailRenderer.renderFromJson`', () => {
         lang: "el",
         subject: "Service email",
         pre: "The pre header text",
-        header: {serviceName:'Service name', name:'First and Last name'},
-        success: {
-            title:'title part',
-            body:'body part'
-        },
+        header: {serviceName:'Service name'},
         body: [
             {"component": "bodyParagraph", body:"Paragraph"},
-            {"component": "bodyHeading",params: '{"headinLevel":1}',body:"Heading 1"},
-            {"component": "bodyHeading",params: '{"headinLevel":2}',body:"Heading 2"},
-            {"component": "bodyHeading",params: '{"headinLevel":3}',body:"Heading 3"},
-            {"component": "bodyHeading",params: '{"headinLevel":4}',body:"Heading 4"},
+            {"component": "bodySuccess", params:"{title:'title part', body:'body part'}"},
+            {"component": "bodyHeading",params: '{"headingLevel":1}',body:"Heading 1"},
+            {"component": "bodyHeading",params: '{"headingLevel":2}',body:"Heading 2"},
+            {"component": "bodyHeading",params: '{"headingLevel":3}',body:"Heading 3"},
+            {"component": "bodyHeading",params: '{"headingLevel":4}',body:"Heading 4"},
         ],
         footer: {
             footerText: "Name of service"
@@ -101,7 +98,7 @@ function renderChecks(renderedHTML, checksNum){
     });
     it(checksNum+'7 `header` block and `header` macro render as expected', async () => {
         // check for structure 
-        let expectedRegex = /<body>([\s\S]*?)<!-- HEADER -->\s*<table([\s\S]*?)>\s*<tr([\s\S]*?)>\s*<td([\s\S]*?)>\s*<img([\s\S]*?)>\s*<\/td([\s\S]*?)>\s*<\/tr([\s\S]*?)>\s*<tr([\s\S]*?)>\s*<td([\s\S]*?)>\s*<div([\s\S]*?)>([\s\S]*?)<\/div>\s*<\/td([\s\S]*?)>\s*<\/tr([\s\S]*?)>\s*<tr([\s\S]*?)>\s*<td([\s\S]*?)>\s*<div([\s\S]*?)>([\s\S]*?)<\/div>\s*<\/td([\s\S]*?)>\s*<\/tr([\s\S]*?)>([\s\S]*?)<\/table>/;
+        let expectedRegex = /<body>([\s\S]*?)<!-- HEADER -->\s*<table([\s\S]*?)>\s*<tr([\s\S]*?)>\s*<td([\s\S]*?)>\s*<img([\s\S]*?)>\s*<\/td([\s\S]*?)>\s*<\/tr([\s\S]*?)>\s*<tr([\s\S]*?)>\s*<td([\s\S]*?)>\s*<div([\s\S]*?)>([\s\S]*?)<\/div>\s*<\/td([\s\S]*?)>\s*<\/tr([\s\S]*?)>([\s\S]*?)<\/table>/;
         expect(renderedHTML).to.match(expectedRegex);
         // table style 
         expectedRegex = /<body>([\s\S]*?)<!-- HEADER -->\s*<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >/;
@@ -113,18 +110,12 @@ function renderChecks(renderedHTML, checksNum){
         expectedRegex = /<body>([\s\S]*?)<td align="left" valign="top" style="padding:0px 16px 12px;border-bottom: 4px solid #ffad2d;background:#31576f;background-color:#31576f;">/;
         expect(renderedHTML).to.match(expectedRegex);
         // service name div 
-        expectedRegex = /<body>([\s\S]*?)<div style="font-family:Arial;font-size:18px;line-height:1.5;text-align:left; color:#ffffff;" >/;
-        expect(renderedHTML).to.match(expectedRegex);
-        // 3rd td 
-        expectedRegex = /<body>([\s\S]*?)<td align="center" valign="top" style="padding:20px 16px;">/;
-        expect(renderedHTML).to.match(expectedRegex);
-        // salutation name div 
-        expectedRegex = /<body>([\s\S]*?)<div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;" >/;
+        expectedRegex = /<body>([\s\S]*?)<div style="font-family:Arial;font-size:18px;line-height:1.5;text-align:left; color:#ffffff;">/;
         expect(renderedHTML).to.match(expectedRegex);
     });
     it(checksNum+'8 `success` block and `success` macro render as expected', async () => {
         //check for structure 
-        let expectedRegex = /<body>([\s\S]*?)<!-- SUCCESS -->\s*<table([\s\S]*?)>\s*<tr([\s\S]*?)>\s*<td([\s\S]*?)>\s*<div([\s\S]*?)>([\s\S]*?)<\/div>\s*<\/td([\s\S]*?)>\s*<\/tr([\s\S]*?)>\s*<tr([\s\S]*?)>\s*<td([\s\S]*?)>\s*<div([\s\S]*?)>([\s\S]*?)<\/div>\s*<\/td([\s\S]*?)>\s*<\/tr([\s\S]*?)>([\s\S]*?)<\/table>/;
+        let expectedRegex = /<body>([\s\S]*?)<tr>\s*<td align="center" valign="top" style="padding:10px 0;">\s*<table([\s\S]*?)>\s*<tr([\s\S]*?)>\s*<td([\s\S]*?)>\s*<div([\s\S]*?)>([\s\S]*?)<\/div>\s*<\/td([\s\S]*?)>\s*<\/tr([\s\S]*?)>\s*<tr([\s\S]*?)>\s*<td([\s\S]*?)>\s*<div([\s\S]*?)>([\s\S]*?)<\/div>\s*<\/td([\s\S]*?)>\s*<\/tr([\s\S]*?)>([\s\S]*?)<\/table>\s*<\/td([\s\S]*?)>\s*<\/tr([\s\S]*?)>/;
         expect(renderedHTML).to.match(expectedRegex);
         // table style
         expectedRegex = /<body>([\s\S]*?)<table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:10px 0;max-width: 600px;background:#00703c;background-color:#00703c;" >/;
@@ -138,22 +129,22 @@ function renderChecks(renderedHTML, checksNum){
     });
     it(checksNum+'9 `bodyParagraph` macro render as expected', async () => {
         // Define the regular expression to match the expected segment
-        const expectedRegex = /<body>([\s\S]*?)<tr>\s*<td align="center" valign="top" style="padding:10px 16px;">\s*<div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;" >\s*Paragraph\s*<\/div>\s*<\/td>\s*<\/tr>/;
+        const expectedRegex = /<body>([\s\S]*?)<tr>\s*<td align="center" valign="top" style="padding:10px 16px;">\s*<div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;">\s*Paragraph\s*<\/div>\s*<\/td>\s*<\/tr>/;
         // Check if the rendered HTML matches the regular expression pattern
         expect(renderedHTML).to.match(expectedRegex);
     });
     it(checksNum+'10 `bodyHeading` macro render as expected', async () => {
         // Heading 1
-        let expectedRegex = /<body>([\s\S]*?)<tr>\s*<td align="center" valign="top" style="padding:10px 16px;">\s*<div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;" >\s*<h1 style="font-size:28px;font-weight:700;margin: 0;">\s*Heading 1\s*<\/h1>\s*<\/div>\s*<\/td>\s*<\/tr>/;
+        let expectedRegex = /<body>([\s\S]*?)<tr>\s*<td align="center" valign="top" style="padding:10px 16px;">\s*<div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;">\s*<h1 style="font-size:28px;font-weight:700;margin: 0;">\s*Heading 1\s*<\/h1>\s*<\/div>\s*<\/td>\s*<\/tr>/;
         expect(renderedHTML).to.match(expectedRegex);
         // Heading 2
-        expectedRegex = /<body>([\s\S]*?)<tr>\s*<td align="center" valign="top" style="padding:10px 16px;">\s*<div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;" >\s*<h2 style="font-size:24px;font-weight:700;margin: 0;">\s*Heading 2\s*<\/h2>\s*<\/div>\s*<\/td>\s*<\/tr>/;
+        expectedRegex = /<body>([\s\S]*?)<tr>\s*<td align="center" valign="top" style="padding:10px 16px;">\s*<div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;">\s*<h2 style="font-size:24px;font-weight:700;margin: 0;">\s*Heading 2\s*<\/h2>\s*<\/div>\s*<\/td>\s*<\/tr>/;
         expect(renderedHTML).to.match(expectedRegex);
         // Heading 3
-        expectedRegex = /<body>([\s\S]*?)<tr>\s*<td align="center" valign="top" style="padding:10px 16px;">\s*<div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;" >\s*<h3 style="font-size:20px;font-weight:700;margin: 0;">\s*Heading 3\s*<\/h3>\s*<\/div>\s*<\/td>\s*<\/tr>/;
+        expectedRegex = /<body>([\s\S]*?)<tr>\s*<td align="center" valign="top" style="padding:10px 16px;">\s*<div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;">\s*<h3 style="font-size:20px;font-weight:700;margin: 0;">\s*Heading 3\s*<\/h3>\s*<\/div>\s*<\/td>\s*<\/tr>/;
         expect(renderedHTML).to.match(expectedRegex);
         // Heading 4
-        expectedRegex = /<body>([\s\S]*?)<tr>\s*<td align="center" valign="top" style="padding:10px 16px;">\s*<div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;" >\s*<h4 style="font-size:18px;font-weight:700;margin: 0;">\s*Heading 4\s*<\/h4>\s*<\/div>\s*<\/td>\s*<\/tr>/;
+        expectedRegex = /<body>([\s\S]*?)<tr>\s*<td align="center" valign="top" style="padding:10px 16px;">\s*<div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;">\s*<h4 style="font-size:18px;font-weight:700;margin: 0;">\s*Heading 4\s*<\/h4>\s*<\/div>\s*<\/td>\s*<\/tr>/;
         expect(renderedHTML).to.match(expectedRegex);
     });
     it(checksNum+'11 `footer` block and `footer` macro render as expected', async () => {
