@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.0.0] - 2024-04-23
+
+Restructure of the `govcyBase.njk`. Success now is part of the body and removed salutation from header.
+
+### Added
+- `lang` parameter in all components with text content
+- `bodySuccess.njk` which renders success panel inside the body
+
+### Changed
+- body vertical spacing
+
+### Removed
+- Unnecessary templates
+- `success` block from `govcyBase.njk` and templates
+- `success.njk`. It is replaced by `bodySuccess.njk` which is rendered in the body block 
+- Salutation from header. If needed can now be a paragraph inside the body
+
 ## [v1.0.9] - 2024-04-23
 
 ### Changed

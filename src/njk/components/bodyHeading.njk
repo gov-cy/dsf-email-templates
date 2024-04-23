@@ -1,11 +1,12 @@
 {# body Heading
- @param {string} headinLevel The heading level. Optional, default is 1. Can be 1,2,3,4 
+ @param {string} headingLevel The heading level. Optional, default is 1. Can be 1,2,3,4 
+ @param {string} lang The language used. Can be 'en','el'. Optional.
  @returns govcy body Heading for emails html 
 #}
 {% macro gocvyEmailBodyHeading(params) -%}
 {%- from "./bodyParagraph.njk" import gocvyEmailBodyParagraph -%}
 {#- set default values -#}
-{%- set headingLevel = params.headinLevel | default(1) -%}
+{%- set headingLevel = params.headingLevel | default(1) -%}
 {%- if headingLevel > 4 -%} 
     {%- set headingLevel = 4 -%} 
 {%- endif -%}
@@ -19,7 +20,7 @@
 {%- else -%}
     {%- set fontSize = '18px' -%}
 {%- endif -%}
-{% call gocvyEmailBodyParagraph() %}
+{% call gocvyEmailBodyParagraph({lang:params.lang}) %}
     <h{{headingLevel}} style="font-size:{{fontSize}};font-weight:700;margin: 0;">
         {{ caller() }}
     </h{{headingLevel}}>

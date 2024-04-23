@@ -79,29 +79,25 @@ export default class DSFEmailRenderer {
         `
         //if there is a pre-header
         if (jsonInput.hasOwnProperty('pre')){
-          jsonTemplate += `{% block pre -%}{{ govcyEmailElement ('preHeader',{preText:'${jsonInput.pre}'}) }}{%- endblock %}`
+          jsonTemplate += `{% block pre -%}{{ govcyEmailElement ('preHeader',{preText:'${jsonInput.pre}'
+        }) }}{%- endblock %}`
         }
         //if there is a header
         if (jsonInput.hasOwnProperty('header')){
           jsonTemplate += `
             {% block header -%}
               {{ govcyEmailElement ('header',{serviceName:'${jsonInput.header.serviceName}',
-                name:'${jsonInput.header.name}',lang:'${jsonInput.lang}'}) }}
-            {%- endblock %}`
-        }
-        //if there is a success
-        if (jsonInput.hasOwnProperty('success')){
-          jsonTemplate += `
-            {% block success -%}
-              {{ govcyEmailElement ('success',{title:'${jsonInput.success.title}',
-                body:'${jsonInput.success.body}'}) }}
+                name:'${jsonInput.header.name}'
+                ${jsonInput.header.hasOwnProperty("lang")? `,lang:'${jsonInput.header.lang}'`:``}
+              }) }}
             {%- endblock %}`
         }
         //if there is a footer
         if (jsonInput.hasOwnProperty('footer')){
           jsonTemplate += `
             {% block footer -%}
-              {{ govcyEmailElement ('footer',{footerText:'${jsonInput.footer.footerText}'}) }}
+              {{ govcyEmailElement ('footer',{footerText:'${jsonInput.footer.footerText}'
+              ${jsonInput.footer.hasOwnProperty("lang")? `,lang:'${jsonInput.footer.lang}'`:``} }) }}
             {%- endblock %}`
         }
         //if there is a body 

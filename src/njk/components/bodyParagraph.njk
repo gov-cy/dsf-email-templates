@@ -1,10 +1,13 @@
 {# body Paragraph
+ @param {string} lang The language used. Can be 'en','el'. Optional.
  @returns govcy body Paragraph for emails html 
 #}
-{% macro gocvyEmailBodyParagraph() -%}
+{% macro gocvyEmailBodyParagraph(params) -%}
+{#- set default values -#}
+{%- set lang = params.lang | default('el') -%}
 <tr>
     <td align="center" valign="top" style="padding:10px 16px;">
-        <div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;" >
+        <div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;"{% if params.lang %} lang="{{params.lang}}"{% endif %}>
             {{ caller() }}
         </div>
     </td>

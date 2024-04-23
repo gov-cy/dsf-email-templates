@@ -1,17 +1,10 @@
 {# header 
  @param {string} serviceName The service name. Will escape text 
  @param {string} name The name used in salutation. Will escape text 
- @param {string} lang The language used. Can be 'en','el'. Optional, default is 'el'.
+ @param {string} lang The language used. Can be 'en','el'. Optional.
  @returns govcy header for emails html 
 #}
 {% macro gocvyEmailHeader(params) -%}
-{#- set default values -#}
-{%- set lang = params.lang | default('el') -%}
-{#- set language vars -#}
-{%- set salutation -%} 
-   {{- 'Dear' if lang=='en' -}} 
-   {{- 'Αγαπητέ / Αγαπητή' if lang=='el' -}} 
-{%- endset -%}
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
     <tr>
         <!-- IMAGE -->
@@ -22,13 +15,7 @@
     <tr>
         <td align="left" valign="top" style="padding:0px 16px 12px;border-bottom: 4px solid #ffad2d;background:#31576f;background-color:#31576f;">
             <!-- SERVICE NAME -->
-            <div style="font-family:Arial;font-size:18px;line-height:1.5;text-align:left; color:#ffffff;" >{{ params.serviceName }}</div>
-        </td>
-    </tr>
-    <tr>
-        <td align="center" valign="top" style="padding:20px 16px;">
-            <!-- SALUTATION -->
-            <div style="font-family:Arial;font-size:16px;line-height:1.5;text-align:left;" >{{ salutation }} {{params.name}}</div>
+            <div style="font-family:Arial;font-size:18px;line-height:1.5;text-align:left; color:#ffffff;"{% if params.lang %} lang="{{params.lang}}"{% endif %}>{{ params.serviceName }}</div>
         </td>
     </tr>
 </table>

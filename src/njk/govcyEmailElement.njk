@@ -7,10 +7,10 @@
     {%- elif component == 'header' -%}
         {%- from "./components/header.njk" import gocvyEmailHeader -%}
         {{ gocvyEmailHeader(params) }}
-    {#- success -#}
-    {%- elif component == 'success' -%}
-        {%- from "./components/success.njk" import gocvyEmailSuccess -%}
-        {{ gocvyEmailSuccess(params) }}
+    {#- bodySuccess -#}
+    {%- elif component == 'bodySuccess' -%}
+        {%- from "./components/bodySuccess.njk" import gocvyEmailBodySuccess -%}
+        {{ gocvyEmailBodySuccess(params) }}
     {#- bodyList -#}
     {%- elif component == 'bodyList' -%}
         {%- from "./components/bodyList.njk" import gocvyEmailBodyList -%}
@@ -19,6 +19,7 @@
     {%- elif component == 'footer' -%}
         {%- from "./components/footer.njk" import gocvyEmailFooter -%}
         {{ gocvyEmailFooter(params) }}
+    {#- caller elements -#}
     {#- body -#}
     {%- elif component == 'body' -%}
         {%- from "./components/body.njk" import gocvyEmailBody -%}

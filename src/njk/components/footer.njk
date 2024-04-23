@@ -1,5 +1,6 @@
 {# footer 
  @param {string} footerText The footerText. Will escape text 
+ @param {string} lang The language used. Can be 'en','el'. Optional.
  @returns govcy footer for emails html 
 #}
 {% macro gocvyEmailFooter(params) -%}
@@ -11,7 +12,7 @@
                     <strong style="color:#000000; text-decoration: none;font-weight: 500;">gov.cy</strong>
                 </a>
             </div>
-            <div style="font-family:Arial;font-size:16px;text-align:left;margin-bottom: 10px;line-height:1;" >
+            <div style="font-family:Arial;font-size:16px;text-align:left;margin-bottom: 10px;line-height:1;" {% if params.lang %} lang="{{params.lang}}"{% endif %}>
                 {{ params.footerText}}
             </div>
         </td>

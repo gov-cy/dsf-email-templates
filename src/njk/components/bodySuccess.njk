@@ -1,0 +1,28 @@
+{# success panel
+ @param {string} title The success title text. Will escape text 
+ @param {string} body The success body text. Will escape text 
+ @param {string} lang The language used. Can be 'en','el'. Optional.
+ @returns govcy success panel for emails html 
+#}
+{% macro gocvyEmailBodySuccess(params) -%}
+<tr>
+    <td align="center" valign="top" style="padding:10px 0;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:10px 0;max-width: 600px;background:#00703c;background-color:#00703c;" >
+            <tr>
+                <td align="center" valign="top" style="padding:10px 16px;">
+                    <!-- Received -->
+                    <div style="font-family:helvetica;font-size:24px;font-weight:bold;line-height:1.5;text-align:center;color:#ffffff;"{% if params.lang %} lang="{{params.lang}}"{% endif %}>{{ params.title }}</div>
+                </td>
+            </tr>
+            {%- if params.body -%}
+            <tr>
+                <td align="center" valign="top" style="padding:10px 16px;">
+                    <!-- details -->
+                    <div style="font-family:Arial;font-size:18px;line-height:1.5;text-align:center;color:#ffffff;"{% if params.lang %} lang="{{params.lang}}"{% endif %}>{{ params.body }}</div>
+                </td>
+            </tr> 
+            {%- endif -%}
+        </table>
+    </td>
+</tr>
+{%- endmacro %}

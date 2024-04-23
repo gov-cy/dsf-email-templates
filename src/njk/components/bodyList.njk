@@ -1,6 +1,7 @@
 {# body list
  @param {string} type The list type. Optional, default is 'ul'. Can be 'ul', 'ol' 
  @param {array} items The array of items to turn onto list items 
+ @param {string} lang The language used. Can be 'en','el'. Optional.
  @returns govcy body List for emails html 
 #}
 {% macro gocvyEmailBodyList(params) -%}
@@ -15,7 +16,7 @@
     {%- set openHTML = '<ul style="margin:0; margin-left: 16px; padding:0; line-height:22px;" align="left" type="disc">' -%}
     {%- set closeHTML = '</ul>' -%}
 {%- endif -%}
-{% call gocvyEmailBodyParagraph() %}
+{% call gocvyEmailBodyParagraph({lang:params.lang}) %}
     {{ openHTML | safe }}
         {# for each item render list item #}
         {%- for item in params.items -%}
