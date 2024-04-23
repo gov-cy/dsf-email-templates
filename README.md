@@ -1,3 +1,4 @@
+[![npm (scoped)](https://img.shields.io/npm/v/@gov-cy/dsf-email-templates)](https://www.npmjs.com/package/@gov-cy/dsf-email-templates)
 ![License](https://img.shields.io/github/license/gov-cy/dsf-email-template)
 [![Unit test](https://github.com/gov-cy/dsf-email-template/actions/workflows/unit-test.yml/badge.svg)](https://github.com/gov-cy/dsf-email-template/actions/workflows/unit-test.yml)
 [![tag-and-publish-on-version-change](https://github.com/gov-cy/dsf-email-template/actions/workflows/tag-and-publish-on-version-change.yml/badge.svg)](https://github.com/gov-cy/dsf-email-template/actions/workflows/tag-and-publish-on-version-change.yml)
