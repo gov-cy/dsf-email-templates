@@ -86,8 +86,7 @@ export default class DSFEmailRenderer {
         if (jsonInput.hasOwnProperty('header')){
           jsonTemplate += `
             {% block header -%}
-              {{ govcyEmailElement ('header',{serviceName:'${jsonInput.header.serviceName}',
-                name:'${jsonInput.header.name}'
+              {{ govcyEmailElement ('header',{serviceName:'${jsonInput.header.serviceName}'
                 ${jsonInput.header.hasOwnProperty("lang")? `,lang:'${jsonInput.header.lang}'`:``}
               }) }}
             {%- endblock %}`
@@ -108,7 +107,7 @@ export default class DSFEmailRenderer {
           jsonInput.body.forEach(bodyElement => {
             //add body email element in template
             jsonTemplate += `
-            {% call govcyEmailElement('${bodyElement.component}',${bodyElement.params}) -%}
+            {% call govcyEmailElement('${bodyElement.component}',${JSON.stringify(bodyElement.params)}) -%}
               ${bodyElement.body}
             {%- endcall %}
             `
