@@ -369,10 +369,10 @@ const inputJson={
         body:'body part'
     },
     body: [
-        {"component": "bodySuccess", params:"{title:'title part', body:'body part'}"},
-        {"component": "bodyHeading",params: '{"headingLevel":1}',body:"Heading 1"},
-        {"component": "bodyParagraph", body:"Paragraph",params:'{lang:"en"}'},
-        {"component": "bodyList", params:'{type:"ol", items: ["item 1", "item 2", "item 3"]}'}
+        {"component": "bodySuccess", params:{title:'title part'}, body:'body part'},
+        {"component": "bodyHeading",params: {"headingLevel":1},body:"Heading 1"},
+        {"component": "bodyParagraph", params:{lang:"en"}, body:"Paragraph"},
+        {"component": "bodyList", params:{type:"ol", items: ["item 1", "item 2", "item 3"]}}
     ],
     footer: {
         footerText: "Name of service"

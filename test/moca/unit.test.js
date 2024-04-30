@@ -40,11 +40,11 @@ describe('2. Testing `DSFEmailRenderer.renderFromJson`', () => {
         header: {serviceName:'Service name'},
         body: [
             {"component": "bodyParagraph", body:"Paragraph"},
-            {"component": "bodySuccess", params:"{title:'title part', body:'body part'}"},
-            {"component": "bodyHeading",params: '{"headingLevel":1}',body:"Heading 1"},
-            {"component": "bodyHeading",params: '{"headingLevel":2}',body:"Heading 2"},
-            {"component": "bodyHeading",params: '{"headingLevel":3}',body:"Heading 3"},
-            {"component": "bodyHeading",params: '{"headingLevel":4}',body:"Heading 4"},
+            {"component": "bodySuccess", params:{title:'title part', body:'body part'}},
+            {"component": "bodyHeading",params: {"headingLevel":1},body:"Heading 1"},
+            {"component": "bodyHeading",params: {"headingLevel":2},body:"Heading 2"},
+            {"component": "bodyHeading",params: {"headingLevel":3},body:"Heading 3"},
+            {"component": "bodyHeading",params: {"headingLevel":4},body:"Heading 4"},
         ],
         footer: {
             footerText: "Name of service"
