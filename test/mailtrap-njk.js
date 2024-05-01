@@ -32,7 +32,7 @@
  * 
  */
 import nodemailer from 'nodemailer';
-import fs from 'fs';
+import fs from 'fs/promises';
 import { DSFEmailRenderer } from '../src/index.mjs';
 import { exit } from 'process';
 
@@ -46,8 +46,10 @@ async function testMailtrap() {
     process.exit(1);
   }
   const renderer = new DSFEmailRenderer();
-  //render html 
-  const htmlBody = await renderer.renderFromFile(myArgs[0]);
+  // Load template
+  const templateContent = await fs.readFile(myArgs[0], 'utf8');
+  // Render template
+  const htmlBody = renderer.renderFromString(templateContent);
 
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
