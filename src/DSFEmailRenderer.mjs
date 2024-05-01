@@ -1,5 +1,4 @@
 import nunjucks from 'nunjucks';
-import fs from 'fs/promises';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -21,21 +20,7 @@ export default class DSFEmailRenderer {
         const templateDirectory = join(__dirname, 'njk');
         nunjucks.configure(templateDirectory);
       }
-    /**
-     * Renders the email html in file, based on an input html string
-     * 
-     * @param {string} inputHTML The input
-     * @param {string} outputPath The path of the output html file
-     */
-      async saveFile(inputHTML, outputPath) {
-        try { 
-          // Write rendered content to output file
-          await fs.writeFile(outputPath, inputHTML);
-          console.log(`File rendered and saved to ${outputPath}`);
-        } catch (error) {
-          throw new Error(`Error rendering template: ${error.message}`);
-        }
-      }
+    
     /**
      * Returns the rendered email html as string, based on the nunjucks templates
      * 
@@ -48,20 +33,6 @@ export default class DSFEmailRenderer {
           //console.log(renderedContent);
           // Return the rendered template
           return renderedContent;
-      }
-
-      /**
-       * Renders the email html, based on an input template 
-       * 
-       * @param {string} templatePath The path of the template to used as input
-       * @returns {string} Rendered email html as string
-       */
-      async renderFromFile(templatePath) {
-        // Load template
-        const templateContent = await fs.readFile(templatePath, 'utf8');
-        // Render template
-        const renderedContent = this.renderFromString(templateContent);
-        return renderedContent; 
       }
 
       /**

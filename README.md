@@ -86,10 +86,11 @@ const renderedTemplate = renderer.renderFromString(inputString);
 console.log(renderedTemplate); // Output the rendered template
 ```
 
-You may also use the `renderFromFile` and provide a text file with the nunjucks input template as follows:
+You may also use load a template from a file using `fs/promises` and provide a text file with the nunjucks input template as follows:
 
 ```js
 import DSFEmailRenderer from '@gov-cy/dsf-email-templates';
+import fs from 'fs/promises';
 
 // Create an instance of DSFEmailRenderer
 const renderer = new DSFEmailRenderer();
@@ -97,8 +98,10 @@ const renderer = new DSFEmailRenderer();
 // Specify the path of the template file
 const templatePath = 'path/to/template.njk';
 
-// Render the email template from the input file
-const renderedTemplate = await renderer.renderFromFile(templatePath);
+// Load template file
+const templateContent = await fs.readFile(templatePath, 'utf8');
+// Render template
+const renderedTemplate = renderer.renderFromString(templateContent);
 
 console.log(renderedTemplate); // Output the rendered template
 
