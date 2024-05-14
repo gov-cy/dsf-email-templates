@@ -21,7 +21,9 @@ describe('1. Testing `DSFEmailRenderer.renderFromString`, use of `govcyBase.njk`
                 {% call govcyEmailElement('bodyHeading',{headingLevel:2}) -%}Heading 2{%- endcall %}
                 {% call govcyEmailElement('bodyHeading',{headingLevel:3}) -%}Heading 3{%- endcall %}
                 {% call govcyEmailElement('bodyHeading',{headingLevel:4}) -%}Heading 4{%- endcall %}
-            {% endcall %}
+                {{ govcyEmailElement ('bodyList',{type:'ol', items: ["item 1", "item 2", "item 3"]}) }}
+                {{ govcyEmailElement ('bodyList',{type:'ul', items: ["item 1", "item 2", "item 3"]}) }}
+                {% endcall %}
         {% endblock %}
         {% block footer -%}
             {{ govcyEmailElement ('footer',{footerText:'Όνομα υπηρεσίας'}) }}
@@ -45,6 +47,8 @@ describe('2. Testing `DSFEmailRenderer.renderFromJson`', () => {
             {"component": "bodyHeading",params: {"headingLevel":2},body:"Heading 2"},
             {"component": "bodyHeading",params: {"headingLevel":3},body:"Heading 3"},
             {"component": "bodyHeading",params: {"headingLevel":4},body:"Heading 4"},
+            {"component": "bodyList", params:{type:'ol', items: ["item 1", "item 2", "item 3"]}},
+            {"component": "bodyList", params:{type:'ul', items: ["item 1", "item 2", "item 3"]}},
         ],
         footer: {
             footerText: "Name of service"
@@ -167,4 +171,20 @@ function renderChecks(renderedHTML, checksNum){
         expectedRegex = /<body>([\s\S]*?)<div style="font-family:Arial;font-size:16px;text-align:left;margin-bottom: 10px;line-height:1;" >/;
         expect(renderedHTML).to.match(expectedRegex);
     });
+    //check for bodyList.njk macro render as expected
+    it(checksNum+'12 `bodyList` macro render as expected', async () => {
+        //check for structure of `ol` block
+        let expectedRegex = /<body>([\s\S]*?)<ol style="margin:0; margin-left: 16px; padding:0; line-height:22px;" align="left">([\s\S]*?)<\/ol>/;
+        expect(renderedHTML).to.match(expectedRegex);
+        //check for structure of `ol` `li` block
+        expectedRegex = /<body>([\s\S]*?)<ol([\s\S]*?)>\s*<li>([\s\S]*?)item 1\s*<\/li>\s*<li>([\s\S]*?)item 2\s*<\/li>\s*<li>([\s\S]*?)item 3\s*<\/li>\s*<\/ol>/;
+        expect(renderedHTML).to.match(expectedRegex);
+        //check for structure of `ul` block
+        expectedRegex = /<body>([\s\S]*?)<ul style="margin:0; margin-left: 16px; padding:0; line-height:22px;" align="left" type="disc">([\s\S]*?)<\/ul>/;
+        expect(renderedHTML).to.match(expectedRegex);
+        //check for structure of `ul` `li` block
+        expectedRegex = /<body>([\s\S]*?)<ul([\s\S]*?)>\s*<li>([\s\S]*?)item 1\s*<\/li>\s*<li>([\s\S]*?)item 2\s*<\/li>\s*<li>([\s\S]*?)item 3\s*<\/li>\s*<\/ul>/;
+        expect(renderedHTML).to.match(expectedRegex);
+    })
+    
 }

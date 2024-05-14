@@ -1,6 +1,6 @@
 {
   "name": "@gov-cy/dsf-email-templates",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "This project can be used to produce html email templates to be used by DSF.",
   "author": "DMRID - DSF Team",
   "license": "MIT",
