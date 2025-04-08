@@ -15,6 +15,10 @@
     {%- elif component == 'bodyList' -%}
         {%- from "./components/bodyList.njk" import gocvyEmailBodyList -%}
         {{ gocvyEmailBodyList(params) }}
+    {#- bodyKeyValue -#}
+    {%- elif component == 'bodyKeyValue' -%}
+        {%- from "./components/bodyKeyValue.njk" import gocvyEmailBodyKeyValue -%}
+        {{ gocvyEmailBodyKeyValue(params) }}
     {#- footer -#}
     {%- elif component == 'footer' -%}
         {%- from "./components/footer.njk" import gocvyEmailFooter -%}

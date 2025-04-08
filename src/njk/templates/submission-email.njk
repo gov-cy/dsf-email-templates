@@ -56,6 +56,7 @@
             {%- endcall %}
             {{ govcyEmailElement ('bodyList',{type:'ol', items: ["xero -", "go", "kouvente"]}) }}
             {{ govcyEmailElement ('bodyList',{type:'ul', items: ['<a href="#">xero</a>', "go", "kouvente"]}) }}
+            {{ govcyEmailElement ('bodyKeyValue',{type:'ul', items: [ {key:'key1', value:'value 1'}, {key:'key2', value:'value 2'} ]}) }}
         {%- endcall%}
     {%- endblock %}
     {# footer block #}
