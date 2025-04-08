@@ -1,0 +1,34 @@
+{# body key value list
+ @param {string} type The list type. Optional, default is 'ul'. Can be 'ul', 'ol' 
+ @param {array} items The array of items to turn onto list items. 
+  i.e. items: 
+    [
+        {key:'key1', value:'value 1'}, 
+        {key:'key2', value:'value 2'}
+    ]
+ @param {string} lang The language used. Can be 'en','el'. Optional.
+ @returns govcy body key value list for emails html 
+#}
+{% macro gocvyEmailBodyKeyValue(params) -%}
+{%- from "./bodyParagraph.njk" import gocvyEmailBodyParagraph -%}
+{#- set default values -#}
+{%- set type = params.type | default('ul') -%}
+{# depending on the heading level set the font-size #}
+{%- if type == 'ol' -%}
+    {%- set openHTML = '<ol style="margin:0; margin-left: 16px; padding:0; line-height:22px;" align="left">' -%}
+    {%- set closeHTML = '</ol>' -%}
+{%- else -%}
+    {%- set openHTML = '<ul style="margin:0; margin-left: 16px; padding:0; line-height:22px;" align="left" type="disc">' -%}
+    {%- set closeHTML = '</ul>' -%}
+{%- endif -%}
+{% call gocvyEmailBodyParagraph({lang:params.lang}) %}
+    {{ openHTML | safe }}
+        {# for each item render list item #}
+        {%- for item in params.items -%}
+            {%- if item -%}
+                <li><b>{{ item.key }}:</b> {{ item.value }}</li>
+            {%- endif -%}
+        {%- endfor -%}
+    {{ closeHTML | safe }}
+{% endcall %}
+{%- endmacro %}

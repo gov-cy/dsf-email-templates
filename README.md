@@ -28,6 +28,11 @@ Compatibility with clients based on mailtrap test on 2024-04-10
 | Yahoo Mail | 100%    |  80%   | 80%  |
 | Other      | 100%    |  89%   | 89%  |
 
+Though the project is not intended to be used for production purposes and does provide any guaranties, your welcome to try it.
+
+> [!WARNING]  
+> The project allows you to input un-escaped HTML in your emails, so use it with care.
+
 ## Features
 
 `DSF-email-templates` can:
@@ -282,6 +287,28 @@ Usage example:
 ```njk
 {{ govcyEmailElement ('bodyList',{type:'ol', items: ["item 1", "item 2", "item 3"]}) }}
 {{ govcyEmailElement ('bodyList',{type:'ul', items: ['<a href="#">item 1</a>', "item 2", "item 3"]}) }}
+```
+</details>
+
+<details>
+  <summary>bodyKeyValue</summary>
+  
+Returns govcy an ordered or un-ordered list with key and value. It should be used in the `body` block. 
+
+**Parameters** 
+- {string} `type` The list type. Optional, default is 'ul'. Can be 'ul', 'ol' 
+- {array} `items` The array of items to turn onto list items. 
+  i.e. items: 
+    [
+        {key:'key1', value:'value 1'}, 
+        {key:'key2', value:'value 2'}
+    ]
+- {string} `lang` The language used. Can be 'en','el'. Optional.
+
+Usage example: 
+
+```njk
+{{ govcyEmailElement ('bodyKeyValue',{type:'ul', items: [ {key:'key1', value:'value 1'}, {key:'key2', value:'value 2'} ]}) }}
 ```
 </details>
 
