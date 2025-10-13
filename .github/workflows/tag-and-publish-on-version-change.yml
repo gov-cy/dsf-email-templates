@@ -6,6 +6,12 @@ on:
       - main
     paths:
       - '**'
+
+# 🔸ADDED - enables npm auth via OIDC trusted publisher
+permissions:
+  id-token: write  # Required for OIDC
+  contents: write
+
 jobs:
   # Duplicated from `.github/workflows/version-sanity-checks.yml` could use https://github.blog/2022-02-10-using-reusable-workflows-github-actions ?
   tag-and-publish-on-version-change:
@@ -51,13 +57,15 @@ jobs:
             })
       # Publish on npm
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
+          # 🔸ADDED - enables npm auth via OIDC trusted publisher
+          scope: '@gov-cy'                     # <-- replace with your actual npm scope if applicable
+          always-auth: true
       - name: Install dependencies 
-        run: npm install
+        run: npm ci
       - name: Publish package on NPM 📦
         run: npm publish --access=public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # With the change to use Trusted Publisher the NPM TOKEN is no longer needed
