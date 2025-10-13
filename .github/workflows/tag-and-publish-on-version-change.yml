@@ -62,6 +62,7 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
           # 🔸ADDED - enables npm auth via OIDC trusted publisher
+          scope: '@gov-cy'
           always-auth: true
       - name: Install dependencies 
         run: npm ci
