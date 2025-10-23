@@ -18,7 +18,7 @@ jobs:
     name: Tag and publish on version change
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: EndBug/version-check@v2.1.0
         with:
           static-checking: localIsNew
@@ -56,8 +56,6 @@ jobs:
               sha: context.sha
             })
       # Publish on npm
-      - name: Verify npm authentication
-        run: npm whoami
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -66,6 +64,8 @@ jobs:
           # 🔸ADDED - enables npm auth via OIDC trusted publisher
           scope: '@gov-cy'
           always-auth: true
+      - name: Verify npm authentication
+        run: npm whoami
       - name: Install dependencies 
         run: npm ci
       - name: Publish package on NPM 📦
