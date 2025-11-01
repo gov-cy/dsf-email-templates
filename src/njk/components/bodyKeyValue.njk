@@ -26,7 +26,7 @@
         {# for each item render list item #}
         {%- for item in params.items -%}
             {%- if item -%}
-                <li><b>{{ item.key }}:</b> {{ item.value }}</li>
+                <li style="padding-bottom:10px;line-height: 1.6;"><b>{{ item.key }}</b><br>{{ item.value }}</li>
             {%- endif -%}
         {%- endfor -%}
     {{ closeHTML | safe }}

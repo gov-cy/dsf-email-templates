@@ -191,7 +191,7 @@ function renderChecks(renderedHTML, checksNum){
     //check for bodyKeyValue.njk macro render as expected
     it(checksNum+'13 `bodyKeyValue` macro render as expected', async () => {
         //check for structure of `ol` block
-        let expectedRegex =  /<body>([\s\S]*?)<ul([\s\S]*?)>\s*<li>\s*<b>\s*key1:<\/b> value 1\s*<\/li>\s*<li>\s*<b>\s*key2:<\/b> value 2\s*<\/li>\s*<\/ul>/;
+        let expectedRegex =  /<body>([\s\S]*?)<ul([\s\S]*?)>\s*<li\s*style="padding-bottom:10px;line-height:\s*1.6;">\s*<b>\s*key1<\/b><br>value 1\s*<\/li>\s*<li\s*style="padding-bottom:10px;line-height:\s*1.6;">\s*<b>\s*key2<\/b><br>value 2\s*<\/li>\s*<\/ul>/;
         expect(renderedHTML).to.match(expectedRegex);        
     })
     
