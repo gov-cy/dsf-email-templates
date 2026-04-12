@@ -1,6 +1,6 @@
 {
   "name": "@gov-cy/dsf-email-templates",
-  "version": "2.1.14",
+  "version": "2.1.15",
   "description": "This project can be used to produce html email templates to be used by DSF.",
   "author": "DMRID - DSF Team",
   "license": "MIT",
@@ -24,8 +24,7 @@
   },
   "homepage": "https://github.com/gov-cy/dsf-email-templates",
   "dependencies": {
-    "nunjucks": "^3.2.4",
-    "semver": ">=7.5.2"
+    "nunjucks": "^3.2.4"
   },
   "scripts": {
     "test": "mocha --timeout 60000 ./test/**/*.test.js",
