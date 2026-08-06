@@ -7,8 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v2.1.17] - 2026-08-06
 ### Security
-- Updated vulnerable **production/runtime dependencies** (`dependencies`).
-- **Impact:** npm package consumers **are affected**.
+- Updated vulnerable **development-only dependencies** (`devDependencies`).
+- No production/runtime dependency changes.
+- **Impact:** npm package consumers are **not affected**.
 
 ## [v2.1.16] - 2026-06-22
 ### Security
