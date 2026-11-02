@@ -1,6 +1,6 @@
 {
   "name": "@gov-cy/dsf-email-templates",
-  "version": "2.1.20",
+  "version": "2.1.21",
   "description": "This project can be used to produce html email templates to be used by DSF.",
   "author": "DMRID - DSF Team",
   "license": "MIT",
@@ -36,5 +36,9 @@
     "chai": "^5.1.0",
     "mocha": "^12.0.3",
     "nodemailer": "^10.1.1"
+  },
+  "overrides": {
+    "glob": "^14.0.3",
+    "minimatch": "^11.0.4"
   }
 }
